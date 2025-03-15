@@ -10,9 +10,13 @@
         /// </summary>
         public int SnowflakeCount { get; set; } = 500;
 
-        public int SnowflakeMinSpeed { get; set; } = 1;
         /// <summary>
-        /// Максимальная скорость снежинок
+        /// Минимальная скорость падения снежинок
+        /// </summary>
+        public int SnowflakeMinSpeed { get; set; } = 1;
+
+        /// <summary>
+        /// Максимальная скорость падения снежинок
         /// </summary>
         public int SnowflakeMaxSpeed { get; set; } = 2;
 
