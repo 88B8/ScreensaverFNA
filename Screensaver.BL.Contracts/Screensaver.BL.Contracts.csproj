@@ -46,6 +46,9 @@
     <Reference Include="FNA">
       <HintPath>..\GameEngine\FNA.dll</HintPath>
     </Reference>
+    <Reference Include="Screensaver.BL.Contacts.Models">
+      <HintPath>..\Screensaver.BL.Contacts.Models\bin\Debug\Screensaver.BL.Contacts.Models.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

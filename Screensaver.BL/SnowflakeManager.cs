@@ -11,14 +11,12 @@ namespace Screensaver.BL
 
     public class SnowflakeManager : ISnowflakeManager
     {
-        private int screenWidth;
-        private int screenHeight;
-        private static Random rand = new Random();
+        private readonly int screenWidth;
+        private readonly int screenHeight;
+        private static readonly Random rand = new Random();
         private readonly List<Snowflake> snowflakes = new List<Snowflake>();
-        private Texture2D snowflakeTexture;
-        private const int SnowflakeCount = 50;
-        private const int SnowflakeMaxSpeed = 6;
-        private const int SnowflakeSizeStep = 5;
+        private readonly Texture2D snowflakeTexture;
+        private readonly SnowflakeSettings settings = new SnowflakeSettings();
 
         /// <summary>
         /// Инициализирует новый экземляр <see cref="SnowflakeManager"/>
@@ -27,18 +25,22 @@ namespace Screensaver.BL
         {
             this.screenWidth = screenWidth;
             this.screenHeight = screenHeight;
-            this.snowflakeTexture = snowflakeTexture;
+            this.snowflakeTexture = snowflakeTexture ?? throw new ArgumentNullException();
         }
 
         public void GenerateSnowflakes()
         {
-            for (var i = 0; i < SnowflakeCount; i++)
+            snowflakes.Clear();
+
+            int maxDivisor = Math.Max(2, settings.SnowflakeMaxSpeed / settings.SnowflakeSizeStep);
+
+            for (var i = 0; i < settings.SnowflakeCount; i++)
             {
                 snowflakes.Add(new Snowflake
                 {
                     X = rand.Next(screenWidth),
                     Y = rand.Next(screenHeight),
-                    Size = rand.Next(1, SnowflakeMaxSpeed / SnowflakeSizeStep) * SnowflakeSizeStep,
+                    Size = rand.Next(1, maxDivisor) * settings.SnowflakeSizeStep,
                 });
             }
         }
@@ -47,12 +49,11 @@ namespace Screensaver.BL
         {
             foreach (var snowflake in snowflakes)
             {
-                snowflake.Y += SnowflakeMaxSpeed - snowflake.Size + SnowflakeSizeStep;
+                snowflake.Y += GetSnowflakeSpeed(snowflake);
 
                 if (snowflake.Y >= screenHeight)
                 {
-                    snowflake.Y = -snowflake.Size;
-                    snowflake.X = rand.Next(screenWidth);
+                    ResetSnowflake(snowflake);
                 }
             }
         }
@@ -63,6 +64,26 @@ namespace Screensaver.BL
             {
                 spriteBatch.Draw(snowflakeTexture, new Rectangle(snowflake.X, snowflake.Y, snowflake.Size, snowflake.Size), Color.White);
             }
+        }
+
+        /// <summary>
+        /// Возвращает снежинку наверх экрана
+        /// </summary>
+        private void ResetSnowflake(Snowflake snowflake)
+        {
+            snowflake.Y = -snowflake.Size;
+            snowflake.X = rand.Next(screenWidth);
+        }
+
+        /// <summary>
+        /// Рассчитывает скорость <see cref="Snowflake"/>
+        /// </summary>
+        private int GetSnowflakeSpeed(Snowflake snowflake)
+        {
+            int calculatedSpeed = settings.SnowflakeMaxSpeed - snowflake.Size + settings.SnowflakeSizeStep;
+            calculatedSpeed = Math.Min(settings.SnowflakeMaxSpeed, Math.Max(settings.SnowflakeMinSpeed, calculatedSpeed)); //Math.Clamp
+
+            return calculatedSpeed;
         }
     }
 }

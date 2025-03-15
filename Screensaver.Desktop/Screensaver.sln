@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Screensaver.BL.Contracts", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Screensaver.BL", "..\Screensaver.BL\Screensaver.BL.csproj", "{812D10F5-0FC2-4C73-AE27-01F05CF3996E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Screensaver.BL.Contacts.Models", "..\Screensaver.BL.Contacts.Models\Screensaver.BL.Contacts.Models.csproj", "{D446CD44-A2C9-44E8-8C4A-2EB4F9EDF3E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Screensaver.BL.Contracts.Models", "..\Screensaver.BL.Contacts.Models\Screensaver.BL.Contracts.Models.csproj", "{D446CD44-A2C9-44E8-8C4A-2EB4F9EDF3E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

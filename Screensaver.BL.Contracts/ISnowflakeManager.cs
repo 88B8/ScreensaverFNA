@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using Screensaver.BL.Contracts.Models;
 
 namespace Screensaver.BL.Contracts
 {

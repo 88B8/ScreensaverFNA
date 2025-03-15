@@ -43,10 +43,6 @@
     <Compile Include="SnowflakeManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Screensaver.BL.Contacts.Models\Screensaver.BL.Contacts.Models.csproj">
-      <Project>{D446CD44-A2C9-44E8-8C4A-2EB4F9EDF3E4}</Project>
-      <Name>Screensaver.BL.Contacts.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Screensaver.BL.Contracts\Screensaver.BL.Contracts.csproj">
       <Project>{931E5D1F-F534-43E2-BEC7-ED3098B80C49}</Project>
       <Name>Screensaver.BL.Contracts</Name>
@@ -55,6 +51,10 @@
   <ItemGroup>
     <Reference Include="FNA">
       <HintPath>..\GameEngine\FNA.dll</HintPath>
+    </Reference>
+    <Reference Include="Screensaver.BL.Contacts.Models, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Screensaver.BL.Contacts.Models\bin\Debug\Screensaver.BL.Contacts.Models.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
