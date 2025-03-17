@@ -1,25 +1,27 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Screensaver.BL;
+using Screensaver.BL.Contracts;
+using Screensaver.BL.Contracts.Models;
 
 namespace Screensaver.Desktop
 {
     public class Screensaver : Game
     {
         private readonly GraphicsDeviceManager graphics;
+        private readonly ISnowflakeManager snowflakeManager;
         private SpriteBatch spriteBatch;
         private Texture2D backgroundTexture;
         private Texture2D snowflakeTexture;
         private KeyboardState keyboardState;
-        private SnowflakeManager snowflakeManager;
 
-        public Screensaver() //This is the constructor, this function is called whenever the game class is created.
+        public Screensaver(ISnowflakeManager snowflakeManager) //This is the constructor, this function is called whenever the game class is created.
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.IsFullScreen = true;
             graphics.ApplyChanges();
+            this.snowflakeManager = snowflakeManager;
         }
 
         /// <summary>
@@ -39,7 +41,6 @@ namespace Screensaver.Desktop
             backgroundTexture = Content.Load<Texture2D>("winter_village");
             snowflakeTexture = Content.Load<Texture2D>("snowflake");
 
-            snowflakeManager = new SnowflakeManager(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, snowflakeTexture);
             snowflakeManager.GenerateSnowflakes();
         }
 
@@ -70,11 +71,22 @@ namespace Screensaver.Desktop
 
             spriteBatch.Begin();
             spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height), Color.White);
-            snowflakeManager.DrawSnowflakes(spriteBatch);
+            DrawSnowflakes();
             spriteBatch.End();
 
             //Draw the things FNA handles for us underneath the hood:
             base.Draw(gameTime);
+        }
+
+        /// <summary>
+        /// Рисует снежинки
+        /// </summary>
+        private void DrawSnowflakes()
+        {
+            foreach (var snowflake in snowflakeManager.GetSnowflakes())
+            {
+                spriteBatch.Draw(snowflakeTexture, new Rectangle(snowflake.X, snowflake.Y, snowflake.Size, snowflake.Size), Color.White);
+            }
         }
     }
 }

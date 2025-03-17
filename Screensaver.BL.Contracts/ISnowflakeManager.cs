@@ -1,5 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Screensaver.BL.Contracts.Models;
+﻿using Screensaver.BL.Contracts.Models;
+using System.Collections.Generic;
 
 namespace Screensaver.BL.Contracts
 {
@@ -19,8 +19,8 @@ namespace Screensaver.BL.Contracts
         void MoveSnowflakes();
 
         /// <summary>
-        /// Рисует снежинки
+        /// Возращает список снежинок
         /// </summary>
-        void DrawSnowflakes(SpriteBatch spriteBatch);
+        IEnumerable<Snowflake> GetSnowflakes();
     }
 }

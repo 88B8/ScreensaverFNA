@@ -1,6 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Screensaver.BL.Contracts;
+﻿using Screensaver.BL.Contracts;
 using Screensaver.BL.Contracts.Models;
 using System;
 using System.Collections.Generic;
@@ -15,17 +13,15 @@ namespace Screensaver.BL
         private readonly int screenHeight;
         private static readonly Random rand = new Random();
         private readonly List<Snowflake> snowflakes = new List<Snowflake>();
-        private readonly Texture2D snowflakeTexture;
         private readonly SnowflakeSettings settings = new SnowflakeSettings();
 
         /// <summary>
         /// Инициализирует новый экземляр <see cref="SnowflakeManager"/>
         /// </summary>
-        public SnowflakeManager(int screenWidth, int screenHeight, Texture2D snowflakeTexture)
+        public SnowflakeManager(int screenWidth, int screenHeight)
         {
             this.screenWidth = screenWidth;
             this.screenHeight = screenHeight;
-            this.snowflakeTexture = snowflakeTexture ?? throw new ArgumentNullException();
         }
 
         public void GenerateSnowflakes()
@@ -58,12 +54,9 @@ namespace Screensaver.BL
             }
         }
 
-        public void DrawSnowflakes(SpriteBatch spriteBatch)
+        public IEnumerable<Snowflake> GetSnowflakes()
         {
-            foreach (var snowflake in snowflakes)
-            {
-                spriteBatch.Draw(snowflakeTexture, new Rectangle(snowflake.X, snowflake.Y, snowflake.Size, snowflake.Size), Color.White);
-            }
+            return snowflakes;
         }
 
         /// <summary>

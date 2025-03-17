@@ -1,4 +1,8 @@
-﻿namespace Screensaver.Desktop
+﻿using Microsoft.Xna.Framework.Graphics;
+using Screensaver.BL;
+using Screensaver.BL.Contracts;
+
+namespace Screensaver.Desktop
 {
     static class Program
     {
@@ -7,7 +11,12 @@
         /// </summary>
         static void Main(string[] args)
         {
-            using (Screensaver screensaver = new Screensaver())
+            GraphicsAdapter adapter = GraphicsAdapter.DefaultAdapter;
+            int screenWidth = adapter.CurrentDisplayMode.Width;
+            int screenHeight = adapter.CurrentDisplayMode.Height;
+
+            ISnowflakeManager snowflakeManager = new SnowflakeManager(screenWidth, screenHeight);
+            using (Screensaver screensaver = new Screensaver(snowflakeManager))
             {
                 screensaver.Run();
             }

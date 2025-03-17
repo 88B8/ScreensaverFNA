@@ -49,9 +49,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="FNA">
-      <HintPath>..\GameEngine\FNA.dll</HintPath>
-    </Reference>
     <Reference Include="Screensaver.BL.Contacts.Models, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Screensaver.BL.Contacts.Models\bin\Debug\Screensaver.BL.Contacts.Models.dll</HintPath>
